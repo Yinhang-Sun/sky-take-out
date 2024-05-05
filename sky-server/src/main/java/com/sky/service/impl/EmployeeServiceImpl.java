@@ -9,6 +9,7 @@ import com.sky.exception.AccountNotFoundException;
 import com.sky.exception.PasswordErrorException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.service.EmployeeService;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -39,7 +40,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         //Password comparison
-        // TODO md5 encryption is required later and then compared.
+        //md5 encryption for password
+        password = DigestUtils.md5DigestAsHex(password.getBytes());
         if (!password.equals(employee.getPassword())) {
             //wrong password
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
