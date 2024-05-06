@@ -1,6 +1,7 @@
 package com.sky.interceptor;
 
 import com.sky.constant.JwtClaimsConstant;
+import com.sky.context.BaseContext;
 import com.sky.properties.JwtProperties;
 import com.sky.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -32,7 +33,9 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
      * @throws Exception
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //判断当前拦截到的是Controller的方法还是其他资源
+        System.out.println("Current thread id: " + Thread.currentThread().getId());
+
+        //Determine whether the currently intercepted method is the Controller's method or other resources
         if (!(handler instanceof HandlerMethod)) {
             //The currently intercepted method is not a dynamic method, so let it go directly.
             return true;
@@ -43,10 +46,11 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
 
         //2. Verification token
         try {
-            log.info("jwt verification:{}", token);
+            log.info("JWT verification:{}", token);
             Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
             Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
             log.info("Current employee id:", empId);
+            BaseContext.setCurrentId(empId);
             //3. Pass, release
             return true;
         } catch (Exception ex) {

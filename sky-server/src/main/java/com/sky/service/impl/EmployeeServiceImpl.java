@@ -1,7 +1,10 @@
 package com.sky.service.impl;
 
 import com.sky.constant.MessageConstant;
+import com.sky.constant.PasswordConstant;
 import com.sky.constant.StatusConstant;
+import com.sky.context.BaseContext;
+import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
@@ -10,9 +13,13 @@ import com.sky.exception.PasswordErrorException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.service.EmployeeService;
 import lombok.val;
+import org.apache.commons.codec.cli.Digest;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import java.time.LocalDateTime;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -54,6 +61,37 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //3. Return the entity object
         return employee;
+    }
+
+    /**
+     * Add new employee
+     * @param employeeDTO
+     */
+    public void save(EmployeeDTO employeeDTO) {
+        System.out.println("Current thread id: " + Thread.currentThread().getId());
+
+        Employee employee = new Employee();
+
+        //objects attributes copy
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+        //set account status, default 1 enable
+        employee.setStatus(StatusConstant.ENABLE);
+
+        //Set password, default password is 123456
+        employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
+
+        //set create time and update time of the current record
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+
+        //set creator id and editor id of the current record
+        // TODO Later, it needs to be changed to the ID of the currently logged in user.
+        employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        employeeMapper.insert(employee);
+
     }
 
 }
