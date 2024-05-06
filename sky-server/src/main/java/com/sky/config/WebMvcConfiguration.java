@@ -43,6 +43,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      */
     @Bean
     public Docket docket() {
+        log.info("Prepare to generate interface documentation...");
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("Sky Takeout Project Interface Document")
                 .version("2.0")
@@ -58,10 +59,11 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     }
 
     /**
-     * Set static resource mapping
+     * configure static resource mapping
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        log.info("Start setting up static resource mapping...");
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }

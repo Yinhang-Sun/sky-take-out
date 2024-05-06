@@ -7,7 +7,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@ApiModel(description = "Data model passed when employees log in")
+@ApiModel(description = "Data model passed when employees login")
 public class EmployeeLoginDTO implements Serializable {
 
     @ApiModelProperty("username")
