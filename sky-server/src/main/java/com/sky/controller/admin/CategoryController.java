@@ -18,7 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin/category")
-@Api(tags = "category related interface")
+@Api(tags = "Category related interface")
 @Slf4j
 public class CategoryController {
 
@@ -31,9 +31,9 @@ public class CategoryController {
      * @return
      */
     @PostMapping
-    @ApiOperation("add category")
+    @ApiOperation("Add category")
     public Result<String> save(@RequestBody CategoryDTO categoryDTO){
-        log.info("add category：{}", categoryDTO);
+        log.info("Add category：{}", categoryDTO);
         categoryService.save(categoryDTO);
         return Result.success();
     }
@@ -44,9 +44,9 @@ public class CategoryController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation("category pagination query")
+    @ApiOperation("Category pagination query")
     public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
-        log.info("category pagination query：{}", categoryPageQueryDTO);
+        log.info("Category pagination query：{}", categoryPageQueryDTO);
         PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
         return Result.success(pageResult);
     }
@@ -57,9 +57,9 @@ public class CategoryController {
      * @return
      */
     @DeleteMapping
-    @ApiOperation("delete category")
+    @ApiOperation("Delete category")
     public Result<String> deleteById(Long id){
-        log.info("delete category：{}", id);
+        log.info("Delete category：{}", id);
         categoryService.deleteById(id);
         return Result.success();
     }
@@ -70,7 +70,7 @@ public class CategoryController {
      * @return
      */
     @PutMapping
-    @ApiOperation("update category")
+    @ApiOperation("Update category")
     public Result<String> update(@RequestBody CategoryDTO categoryDTO){
         categoryService.update(categoryDTO);
         return Result.success();
@@ -83,7 +83,7 @@ public class CategoryController {
      * @return
      */
     @PostMapping("/status/{status}")
-    @ApiOperation("enable or disable category")
+    @ApiOperation("Enable or disable category")
     public Result<String> startOrStop(@PathVariable("status") Integer status, Long id){
         categoryService.startOrStop(status,id);
         return Result.success();
@@ -95,7 +95,7 @@ public class CategoryController {
      * @return
      */
     @GetMapping("/list")
-    @ApiOperation("query category by type")
+    @ApiOperation("Query category by type")
     public Result<List<Category>> list(Integer type){
         List<Category> list = categoryService.list(type);
         return Result.success(list);
