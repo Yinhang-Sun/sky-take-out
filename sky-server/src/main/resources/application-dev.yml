@@ -8,6 +8,6 @@ sky:
     password:
   alioss:
     endpoint: oss-cn-hangzhou.aliyuncs.com
-    access-key-id: LTAI5tPeFLzsPPT8gG3LPW64
+    access-key-id:
     access-key-secret:
     bucket-name: sky-take-out
