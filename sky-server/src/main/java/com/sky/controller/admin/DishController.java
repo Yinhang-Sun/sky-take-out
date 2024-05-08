@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Dish management
  */
@@ -47,5 +49,18 @@ public class DishController {
         log.info("Dish pagination query: {}", dishPageQueryDTO);
         PageResult pageResult = dishService.pageQuery(dishPageQueryDTO);
         return Result.success(pageResult);
+    }
+
+    /**
+     * Delete dish in batches
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation("Delete dish in batches")
+    public Result delete(@RequestParam List<Long> ids) {
+        log.info("Delete dish in batches: {}", ids);
+        dishService.deleteBatch(ids);
+        return Result.success();
     }
 }
