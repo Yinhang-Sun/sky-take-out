@@ -16,6 +16,7 @@ import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,5 +102,48 @@ public class DishServiceImpl implements DishService {
             dishFlavorMapper.deleteByDishId(id);
         }
 
+    }
+
+    /**
+     * Get dish by id with corresponding flavors
+     * @param id
+     * @return
+     */
+    public DishVO getByIdWithFlavor(Long id) {
+        //get dish by id
+        Dish dish = dishMapper.getById(id);
+
+        //get flavors based on dish id
+        List<DishFlavor> dishFlavors = dishFlavorMapper.getByDishId(id);
+
+        //encapsulate data into dishVO
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish, dishVO);
+        dishVO.setFlavors(dishFlavors);
+
+        return dishVO;
+    }
+
+    /**
+     * Update dish and related flavors based on dish id
+     * @param dishDTO
+     */
+    public void updateWithFlavor(DishDTO dishDTO) {
+        //update dish basic info
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO, dish);
+        dishMapper.update(dish);
+
+        //delete the original flavor data
+        dishFlavorMapper.deleteByDishId(dishDTO.getId());
+
+        //insert the new flavors
+        List<DishFlavor> flavors = dishDTO.getFlavors();
+        if(flavors != null && flavors.size() > 0) {
+            flavors.forEach(dishFlavor ->
+                    dishFlavor.setDishId(dishDTO.getId()));
+            //insert data into dish_flavor, many
+            dishFlavorMapper.insertBatch(flavors);
+        }
     }
 }
