@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -92,5 +93,50 @@ public class SetmealServiceImpl implements SetmealService {
             //delete setmeal_dish data
             setmealDishMapper.deleteBySetmealId(setmealId);
         });
+    }
+
+    /**
+     * Query setmeal based on id, used to edit the page with echo data
+     * @param id
+     * @return
+     */
+    public SetmealVO getByIdWithDish(Long id) {
+        Setmeal setmeal = setmealMapper.getByid(id);
+        SetmealVO setmealVO = new SetmealVO();
+        BeanUtils.copyProperties(setmeal, setmealVO);
+
+        List<SetmealDish> setmealDishes = setmealDishMapper.getBySetmealId(id);
+        setmealVO.setSetmealDishes(setmealDishes);
+        return setmealVO;
+    }
+
+    /**
+     * Update setmeal
+     * @param setmealDTO
+     * @return
+     */
+    @Transactional
+    public void update(SetmealDTO setmealDTO) {
+        Setmeal setmeal = new Setmeal();
+        BeanUtils.copyProperties(setmealDTO, setmeal);
+
+        //1. Modify the setmeal table and execute update
+        setmealMapper.update(setmeal);
+
+        //setmeal id
+        Long setmealId = setmeal.getId();
+
+        //2. Delete the relationship between the setmeal and the dish,
+        // operate the setmeal_dish table, and execute delete
+        setmealDishMapper.deleteBySetmealId(setmealId);
+
+        List<SetmealDish> setmealDishes = setmealDTO.getSetmealDishes();
+        setmealDishes.forEach(setmealDish -> {
+            setmealDish.setSetmealId(setmealId);
+        });
+
+        //3. Re-insert the relationship between the setmeal and the dish,
+        // operate the setmeal_dish table, and execute insert
+        setmealDishMapper.insertBatch(setmealDishes);
     }
 }

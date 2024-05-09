@@ -5,6 +5,7 @@ import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.SetmealService;
+import com.sky.vo.SetmealVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +63,32 @@ public class SetmealController {
     public Result delete(@RequestParam List<Long> ids) {
         log.info("Delete setmeal in batch: {}", ids);
         setmealService.deleteBatch(ids);
+        return Result.success();
+    }
+
+    /**
+     * Query setmeal based on id, used to edit the page with echo data
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("Get setmeal by id")
+    public Result<SetmealVO> getById(@PathVariable Long id) {
+        log.info("Get setmeal by id: {}", id);
+        SetmealVO setmealVO = setmealService.getByIdWithDish(id);
+        return Result.success(setmealVO);
+    }
+
+    /**
+     * Update setmeal
+     * @param setmealDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("Update setmeal")
+    public Result update(@RequestBody SetmealDTO setmealDTO) {
+        log.info("Update setmeal: {}", setmealDTO);
+        setmealService.update(setmealDTO);
         return Result.success();
     }
 }
