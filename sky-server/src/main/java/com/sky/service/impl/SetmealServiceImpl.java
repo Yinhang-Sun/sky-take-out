@@ -6,9 +6,12 @@ import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageQueryDTO;
+import com.sky.entity.Dish;
 import com.sky.entity.Setmeal;
 import com.sky.entity.SetmealDish;
 import com.sky.exception.DeletionNotAllowedException;
+import com.sky.exception.SetmealEnableFailedException;
+import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
@@ -32,6 +35,8 @@ public class SetmealServiceImpl implements SetmealService {
 
     @Autowired
     private SetmealDishMapper setmealDishMapper;
+    @Autowired
+    private DishMapper dishMapper;
 
     /**
      * Add new setmeal, and save the relationship between the setmeal and the dish
@@ -138,5 +143,31 @@ public class SetmealServiceImpl implements SetmealService {
         //3. Re-insert the relationship between the setmeal and the dish,
         // operate the setmeal_dish table, and execute insert
         setmealDishMapper.insertBatch(setmealDishes);
+    }
+
+    /**
+     * Start or stop sale setmeal
+     * @param status
+     * @param id
+     */
+    public void startOrStop(Integer status, Long id) {
+        //When starting to sell a setmeal, determine whether there are disable dishes in the setmeal.
+        // If there are disable dishes, it will prompt "The setmeal contains unsold dishes and
+        // cannot be launched for sale."
+        // select a.* from dish d left join setmeal_dish s on d.id = s.dish_id where s.setmeal_id = ?
+        if(status == StatusConstant.ENABLE) {
+            List<Dish> dishes = dishMapper.getBySetmealId(id);
+            dishes.forEach(dish -> {
+                if(dish.getStatus() == StatusConstant.DISABLE) {
+                    throw new SetmealEnableFailedException(MessageConstant.SETMEAL_ENABLE_FAILED);
+                }
+            });
+        }
+
+        Setmeal setmeal = Setmeal.builder()
+                .status(status)
+                .id(id)
+                .build();
+        setmealMapper.update(setmeal);
     }
 }
