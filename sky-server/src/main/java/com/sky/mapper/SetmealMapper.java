@@ -51,7 +51,7 @@ public interface SetmealMapper {
      * @return
      */
     @Select("select * from setmeal where id = #{id}")
-    Setmeal getByid(Long id);
+    Setmeal getById(Long id);
 
     /**
      * delete setmeal from setmeal table
