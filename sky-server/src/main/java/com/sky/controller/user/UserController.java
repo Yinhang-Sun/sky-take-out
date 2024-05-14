@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user/user")
-@Api(tags = "Client-side user API")
+@Api(tags = "C-side User API")
 @Slf4j
 public class UserController {
 
