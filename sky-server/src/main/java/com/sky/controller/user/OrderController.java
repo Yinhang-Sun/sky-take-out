@@ -2,6 +2,7 @@ package com.sky.controller.user;
 
 import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
+import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.OrderService;
 import com.sky.vo.OrderPaymentVO;
@@ -44,5 +45,19 @@ public class OrderController {
         OrderPaymentVO orderPaymentVO = orderService.payment(ordersPaymentDTO);
         log.info("Generate prepayment transaction order: {}", orderPaymentVO);
         return Result.success(orderPaymentVO);
+    }
+
+    /**
+     * Query history orders
+     * @param page
+     * @param pageSize
+     * @param status Order status: 1 Pending payment 2 Waiting for order 3 Order received 4 Delivery 5 Completed 6 Canceled
+     * @return
+     */
+    @GetMapping("/historyOrders")
+    @ApiOperation("Query history orders")
+    public Result<PageResult> page(int page, int pageSize, Integer status) {
+        PageResult pageResult = orderService.pageQueryForUser(page, pageSize, status);
+        return Result.success(pageResult);
     }
 }
