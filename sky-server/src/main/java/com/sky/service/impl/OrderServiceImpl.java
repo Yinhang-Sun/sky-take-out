@@ -24,6 +24,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -295,6 +296,63 @@ public class OrderServiceImpl implements OrderService {
 
         //Insert the shopping cart object into database in batches
         shoppingCartMapper.insertBatch(shoppingCartList);
+    }
+
+    /**
+     * Order search
+     * @param ordersPageQueryDTO
+     * @return
+     */
+    public PageResult conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO) {
+        PageHelper.startPage(ordersPageQueryDTO.getPage(), ordersPageQueryDTO.getPageSize());
+
+        Page<Orders> page = orderMapper.pageQuery(ordersPageQueryDTO);
+
+        //For some order status, additional order dish information needs to be returned
+        // and Orders converted to OrderVO.
+        List<OrderVO> orderVOList = getOrderVOList(page);
+
+        return new PageResult(page.getTotal(), orderVOList);
+    }
+
+    private List<OrderVO> getOrderVOList(Page<Orders> page) {
+        //Need to return order dish information and customize the OrderVO response result
+        List<OrderVO> orderVOList = new ArrayList<>();
+
+        List<Orders> ordersList = page.getResult();
+        if(!CollectionUtils.isEmpty(ordersList)) {
+            for (Orders orders : ordersList) {
+                //copy common fields into OrderVO
+                OrderVO orderVO = new OrderVO();
+                BeanUtils.copyProperties(orders, orderVO);
+                String orderDishes = getOrderDishesStr(orders);
+
+                //Encapsulate order dish information into orderVO and add it to orderVOList
+                orderVO.setOrderDishes(orderDishes);
+                orderVOList.add(orderVO);
+            }
+        }
+        return orderVOList;
+    }
+
+    /**
+     * Get the dish information string based on the order id
+     * @param orders
+     * @return
+     */
+    private String getOrderDishesStr(Orders orders) {
+        // Query order dish details (dishes and quantity in order)
+        List<OrderDetail> orderDetailList = orderDetailMapper.getByOrderId(orders.getId());
+
+        // Concatenate each order dish information into a string (format: Kung Pao Chicken*3;)
+        List<String> orderDishList = orderDetailList.stream().map(x -> {
+            String orderDish = x.getName() + "*" + x.getNumber() + ";";
+            return orderDish;
+        }).collect(Collectors.toList());
+
+        // Splice together all the dish information corresponding to the order
+        return String.join("", orderDishList);
+
     }
 
 
