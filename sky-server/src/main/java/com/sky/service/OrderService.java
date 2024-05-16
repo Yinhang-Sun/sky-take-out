@@ -53,4 +53,11 @@ public interface OrderService {
      */
     void userCancelById(Long id) throws Exception;
 
+    /**
+     * One more order
+     * @param id
+     * @return
+     */
+    void repetition(Long id);
+
 }

@@ -29,6 +29,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -266,6 +267,34 @@ public class OrderServiceImpl implements OrderService {
         orders.setCancelReason("User Cancel Order");
         orders.setCancelTime(LocalDateTime.now());
         orderMapper.update(orders);
+    }
+
+    /**
+     * One more order
+     * @param id
+     * @return
+     */
+    public void repetition(Long id) {
+        //Query the current user
+        Long userId = BaseContext.getCurrentId();
+
+        //Query the current order detail by order id
+        List<OrderDetail> orderDetailList = orderDetailMapper.getByOrderId(id);
+
+        //Convert the order detail object into shopping cart object
+        List<ShoppingCart> shoppingCartList = orderDetailList.stream().map(x -> {
+            ShoppingCart shoppingCart = new ShoppingCart();
+
+            //Re-copy the dish information in the original order details to the shopping cart object
+            BeanUtils.copyProperties(x, shoppingCart, "id");
+            shoppingCart.setUserId(userId);
+            shoppingCart.setCreateTime(LocalDateTime.now());
+
+            return shoppingCart;
+        }).collect(Collectors.toList());
+
+        //Insert the shopping cart object into database in batches
+        shoppingCartMapper.insertBatch(shoppingCartList);
     }
 
 
