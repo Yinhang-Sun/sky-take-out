@@ -205,4 +205,24 @@ public class OrderServiceImpl implements OrderService {
         }
         return new PageResult(page.getTotal(), list);
     }
+
+    /**
+     * Query order details
+     * @param id
+     * @return
+     */
+    public OrderVO details(Long id) {
+        //query order by id
+        Orders orders = orderMapper.getById(id);
+
+        //query the dish / setmeal detail related to the orders
+        List<OrderDetail> orderDetailList = orderDetailMapper.getByOrderId(orders.getId());
+
+        //Encapsulate orders and orderDetailList into an OrderVO and return it
+        OrderVO orderVO = new OrderVO();
+        BeanUtils.copyProperties(orders, orderVO);
+        orderVO.setOrderDetailList(orderDetailList);
+
+        return orderVO;
+    }
 }
