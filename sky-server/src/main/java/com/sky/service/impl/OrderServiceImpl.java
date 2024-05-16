@@ -225,4 +225,48 @@ public class OrderServiceImpl implements OrderService {
 
         return orderVO;
     }
+
+    /**
+     * Cancel order
+     * @param id
+     * @return
+     */
+    public void userCancelById(Long id) throws Exception {
+        //Query order by id
+        Orders ordersDB = orderMapper.getById(id);
+
+        //Check if the order exist or not
+        if(ordersDB == null) {
+            throw new OrderBusinessException(MessageConstant.ORDER_NOT_FOUND);
+        }
+
+        //Order status: 1 Pending payment 2 Waiting for order 3 Order received 4 Delivery 5 Completed 6 Canceled
+        if(ordersDB.getStatus() > 2) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+
+        Orders orders = new Orders();
+        orders.setId(ordersDB.getId());
+
+        //If the order is canceled while the order is pending, a refund is required.
+        if(ordersDB.getStatus().equals(orders.TO_BE_CONFIRMED)) {
+            //Call WeChat payment refund interface
+            weChatPayUtil.refund(
+                    ordersDB.getNumber(), //Merchant order number
+                    ordersDB.getNumber(), //Merchant refund order number
+                    new BigDecimal(0.01),//refund amount, unit: dollar
+                    new BigDecimal(0.01));//Original order amount
+
+            //Change payment status to refund
+            orders.setPayStatus(Orders.REFUND);
+        }
+
+        //Update order status, cancellation reason, cancellation time
+        orders.setStatus(orders.CANCELLED);
+        orders.setCancelReason("User Cancel Order");
+        orders.setCancelTime(LocalDateTime.now());
+        orderMapper.update(orders);
+    }
+
+
 }

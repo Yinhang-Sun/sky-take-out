@@ -46,4 +46,11 @@ public interface OrderService {
      */
     OrderVO details(Long id);
 
+    /**
+     * Cancel order
+     * @param id
+     * @return
+     */
+    void userCancelById(Long id) throws Exception;
+
 }
