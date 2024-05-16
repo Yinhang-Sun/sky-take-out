@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
 import com.sky.context.BaseContext;
+import com.sky.controller.admin.CommonController;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
@@ -17,6 +18,7 @@ import com.sky.result.PageResult;
 import com.sky.service.OrderService;
 import com.sky.utils.WeChatPayUtil;
 import com.sky.vo.OrderPaymentVO;
+import com.sky.vo.OrderStatisticsVO;
 import com.sky.vo.OrderSubmitVO;
 import com.sky.vo.OrderVO;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +55,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CommonController commonController;
 
 
     /**
@@ -315,6 +319,7 @@ public class OrderServiceImpl implements OrderService {
         return new PageResult(page.getTotal(), orderVOList);
     }
 
+
     private List<OrderVO> getOrderVOList(Page<Orders> page) {
         //Need to return order dish information and customize the OrderVO response result
         List<OrderVO> orderVOList = new ArrayList<>();
@@ -353,6 +358,25 @@ public class OrderServiceImpl implements OrderService {
         // Splice together all the dish information corresponding to the order
         return String.join("", orderDishList);
 
+    }
+
+    /**
+     * Order quantity statistics for each status
+     * @return
+     */
+    public OrderStatisticsVO statistics() {
+        //According to the status, query the number of orders to be received,
+        // to be delivered, and in delivery.
+        Integer toBeConfirmed = orderMapper.countStatus(Orders.TO_BE_CONFIRMED);
+        Integer confirmed = orderMapper.countStatus(Orders.CONFIRMED);
+        Integer deliveryInProgress = orderMapper.countStatus(Orders.DELIVERY_IN_PROGRESS);
+
+        //Encapsulate the queried data into orderStatisticsVO to respond
+        OrderStatisticsVO orderStatisticsVO = new OrderStatisticsVO();
+        orderStatisticsVO.setToBeConfirmed(toBeConfirmed);
+        orderStatisticsVO.setConfirmed(confirmed);
+        orderStatisticsVO.setDeliveryInProgress(deliveryInProgress);
+        return orderStatisticsVO;
     }
 
 
