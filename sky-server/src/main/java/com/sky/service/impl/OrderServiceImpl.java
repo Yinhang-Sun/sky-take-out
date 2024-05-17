@@ -482,4 +482,28 @@ public class OrderServiceImpl implements OrderService {
 
         orderMapper.update(orders);
     }
+
+    /**
+     * Complete order
+     * @param id
+     * @return
+     */
+    public void complete(Long id) {
+        //Query order by id
+        Orders ordersDB = orderMapper.getById(id);
+
+        //Check if the order exists or not, and if the status is 4
+        if(ordersDB == null || !ordersDB.getStatus().equals(Orders.DELIVERY_IN_PROGRESS)) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+
+        Orders orders = new Orders();
+        orders.setId(ordersDB.getId());
+
+        //Update the order status, converting it to be complete
+        orders.setStatus(Orders.COMPLETED);
+        orders.setDeliveryTime(LocalDateTime.now());
+
+        orderMapper.update(orders);
+    }
 }

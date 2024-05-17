@@ -100,4 +100,11 @@ public interface OrderService {
      */
     void delivery(Long id);
 
+    /**
+     * Complete order
+     * @param id
+     * @return
+     */
+    void complete(Long id);
+
 }
