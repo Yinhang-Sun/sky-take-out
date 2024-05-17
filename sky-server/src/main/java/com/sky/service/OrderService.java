@@ -93,4 +93,11 @@ public interface OrderService {
      */
     void cancel(OrdersCancelDTO ordersCancelDTO) throws Exception;
 
+    /**
+     * Delivery order
+     * @param id
+     * @return
+     */
+    void delivery(Long id);
+
 }
