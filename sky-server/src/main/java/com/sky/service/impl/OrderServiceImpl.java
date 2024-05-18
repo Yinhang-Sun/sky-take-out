@@ -523,4 +523,27 @@ public class OrderServiceImpl implements OrderService {
 
         orderMapper.update(orders);
     }
+
+
+    /**
+     * Client reminder
+     * @param id
+     */
+    public void reminder(Long id) {
+        //Query order by id
+        Orders ordersDB = orderMapper.getById(id);
+
+        //Check if the order exists or not
+        if(ordersDB == null) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+
+        Map map = new HashMap();
+        map.put("type", 2);//1 order reminder, 2 client reminder
+        map.put("orderId", id);
+        map.put("content", "order id: " + ordersDB.getNumber());
+
+        //Push message to client browser via websocket
+        webSocketServer.sendToAllClient(JSON.toJSONString(map));
+    }
 }
