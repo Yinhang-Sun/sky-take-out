@@ -26,7 +26,7 @@ public class WebSocketServer {
      */
     @OnOpen
     public void onOpen(Session session, @PathParam("sid") String sid) {
-        System.out.println("Client：" + sid + "establish connection");
+        System.out.println("Client：" + sid + " establish connection");
         sessionMap.put(sid, session);
     }
 
