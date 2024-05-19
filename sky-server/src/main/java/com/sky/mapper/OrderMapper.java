@@ -74,4 +74,11 @@ public interface OrderMapper {
      */
     Double sumByMap(Map map);
 
+    /**
+     * Statistic order number by dynamic conditions
+     * @param map
+     * @return
+     */
+    Integer countByMap(Map map);
+
 }
