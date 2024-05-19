@@ -247,7 +247,7 @@ public class ReportServiceImpl implements ReportService {
         BusinessDataVO businessDataVO = workspaceService.getBusinessData(LocalDateTime.of(dateBegin, LocalTime.MIN), LocalDateTime.of(dateEnd, LocalTime.MAX));
 
         //2. Write the business data into Excel file by Apache POI
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("template/运营数据报表模板.xlsx");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("template/Business_Data_Report_Template.xlsx");
 
         try {
             //Create a new Excel file based on template file
