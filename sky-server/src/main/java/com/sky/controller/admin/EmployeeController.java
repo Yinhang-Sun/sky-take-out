@@ -29,7 +29,7 @@ import java.util.Map;
 @Api(tags = "Employee API")
 public class EmployeeController {
 
-    //@Autowired
+    @Autowired
     private EmployeeService employeeService;
     @Autowired
     private JwtProperties jwtProperties;
