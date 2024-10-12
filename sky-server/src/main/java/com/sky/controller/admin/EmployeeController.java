@@ -70,8 +70,8 @@ public class EmployeeController {
      *
      * @return
      */
-//    @PostMapping("/logout")
-//    @ApiOperation(value = "Employee logout")
+    @PostMapping("/logout")
+    @ApiOperation(value = "Employee logout")
     public Result<String> logout() {
         return Result.success();
     }
