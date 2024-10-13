@@ -58,8 +58,8 @@ public class WorkSpaceController {
      * Query dish overview
      * @return
      */
-//    @GetMapping("/overviewDishes")
-//    @ApiOperation("Query dish overview")
+    @GetMapping("/overviewDishes")
+    @ApiOperation("Query dish overview")
     public Result<DishOverViewVO> dishOverView(){
         return Result.success(workspaceService.getDishOverView());
     }
