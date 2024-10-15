@@ -84,7 +84,7 @@ public class EmployeeController {
     @PostMapping
     @ApiOperation("Add new employee")
     public Result save(@RequestBody EmployeeDTO employeeDTO) {
-        log.info("employee save {}", employeeDTO);
+        log.info("employee save: {}", employeeDTO);
         System.out.println("Current thread id: " + Thread.currentThread().getId());
         employeeService.save(employeeDTO);
         return Result.success();
@@ -127,7 +127,7 @@ public class EmployeeController {
     @PutMapping
     @ApiOperation("Edit employee info")
     public Result update(@RequestBody EmployeeDTO employeeDTO) {
-        log.info("Employee update {}", employeeDTO);
+        log.info("Employee update: {}", employeeDTO);
         employeeService.update(employeeDTO);
         return Result.success();
     }
