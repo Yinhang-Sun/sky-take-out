@@ -34,7 +34,7 @@ public class CategoryController {
     @ApiOperation("Add category")
     public Result<String> save(@RequestBody CategoryDTO categoryDTO){
         log.info("Add category：{}", categoryDTO);
-//        categoryService.save(categoryDTO);
+        categoryService.save(categoryDTO);
         return Result.success();
     }
 
