@@ -29,7 +29,7 @@ public class OrderController {
     @PostMapping("/submit")
     @ApiOperation("User order")
     public Result<OrderSubmitVO> submit(@RequestBody OrdersSubmitDTO ordersSubmitDTO) {
-        log.info("User order, parameter:{}", ordersSubmitDTO);
+        log.info("User order, parameter: {}", ordersSubmitDTO);
         OrderSubmitVO  orderSubmitVO = orderService.submitOrder(ordersSubmitDTO);
         return Result.success(orderSubmitVO);
     }

@@ -107,7 +107,7 @@ public class AddressBookController {
             return Result.success(list.get(0));
         }
 
-        return Result.error("No default address found");
+        return Result.error("No default address found!");
     }
 
 }
