@@ -5,10 +5,10 @@ package com.sky.constant;
  */
 public class MessageConstant {
 
-    public static final String PASSWORD_ERROR = "wrong password";
+    public static final String PASSWORD_ERROR = "Wrong password";
     public static final String ACCOUNT_NOT_FOUND = "Account does not exist";
     public static final String ACCOUNT_LOCKED = "Account is locked";
-    public static final String ALREADY_EXISTS = " already exists";
+    public static final String ALREADY_EXISTS = "Already exists";
     public static final String UNKNOWN_ERROR = "Unknown error";
     public static final String USER_NOT_LOGIN = "The user is not logged in";
     public static final String CATEGORY_BE_RELATED_BY_SETMEAL = "The current category is associated with setmeals and cannot be deleted";
