@@ -1,7 +1,7 @@
 package com.sky.constant;
 
 /**
- * cryptographic constants
+ * Cryptographic constants
  */
 public class PasswordConstant {
 
