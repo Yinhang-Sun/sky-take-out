@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Data
 public class WeChatProperties {
 
-    private String appid; //appid of the mini program
+    private String appid; //Appid of the mini program
     private String secret; //Secret key of the applet
     private String mchid; //Merchant number
     private String mchSerialNo; //Certificate serial number of merchant API certificate
