@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 public class CategoryDTO implements Serializable {
 
-    //primary key
+    //Primary key
     private Long id;
 
     //Type 1 dish  2 setmeal

@@ -23,7 +23,7 @@ public class DishDTO implements Serializable {
     private String description;
     //0 off-sale 1 on-sale
     private Integer status;
-    //flavors
+    //Flavors
     private List<DishFlavor> flavors = new ArrayList<>();
 
 }

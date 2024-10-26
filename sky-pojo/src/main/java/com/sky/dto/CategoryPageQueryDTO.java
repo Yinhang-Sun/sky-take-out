@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 public class CategoryPageQueryDTO implements Serializable {
 
-    //page number
+    //Page number
     private int page;
 
     //Number of records per page
@@ -16,7 +16,7 @@ public class CategoryPageQueryDTO implements Serializable {
     //Category Name
     private String name;
 
-    //Category type 1 dish  2 set meal
+    //Category type: 1 dish  2 set meal
     private Integer type;
 
 }

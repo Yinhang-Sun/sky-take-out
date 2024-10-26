@@ -13,7 +13,7 @@ public class DishPageQueryDTO implements Serializable {
 
     private String name;
 
-    //category Id
+    //Category Id
     private Integer categoryId;
 
     //Status: 0 disabled, 1 enabled
