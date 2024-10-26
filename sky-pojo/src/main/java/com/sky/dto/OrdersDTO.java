@@ -12,7 +12,7 @@ public class OrdersDTO implements Serializable {
 
     private Long id;
 
-    //order number
+    //Order number
     private String number;
 
     //Order status: 1 pending payment, 2 pending delivery, 3 delivered, 4 completed, 5 canceled
@@ -21,10 +21,10 @@ public class OrdersDTO implements Serializable {
     //Order user id
     private Long userId;
 
-    //address id
+    //Address id
     private Long addressBookId;
 
-    //order time
+    //Order time
     private LocalDateTime orderTime;
 
     //Checkout time
@@ -39,13 +39,13 @@ public class OrdersDTO implements Serializable {
     //Remark
     private String remark;
 
-    //username
+    //Username
     private String userName;
 
     //Phone number
     private String phone;
 
-    //address
+    //Address
     private String address;
 
     //Receiver

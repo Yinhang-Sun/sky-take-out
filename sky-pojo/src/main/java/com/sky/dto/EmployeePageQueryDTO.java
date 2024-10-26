@@ -7,10 +7,10 @@ import java.io.Serializable;
 @Data
 public class EmployeePageQueryDTO implements Serializable {
 
-    //employee's name
+    //Employee's name
     private String name;
 
-    //page number
+    //Page number
     private int page;
 
     //Display the number of records per page
