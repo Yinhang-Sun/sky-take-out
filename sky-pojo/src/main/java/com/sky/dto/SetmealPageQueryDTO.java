@@ -13,7 +13,7 @@ public class SetmealPageQueryDTO implements Serializable {
 
     private String name;
 
-    //category id
+    //Category id
     private Integer categoryId;
 
     //Status 0 means disabled, 1 means enabled
