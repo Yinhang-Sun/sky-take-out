@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * address book
+ * Address book
  */
 @Data
 @Builder
@@ -20,7 +20,7 @@ public class AddressBook implements Serializable {
 
     private Long id;
 
-    //user id
+    //User id
     private Long userId;
 
     //Receiver
@@ -35,13 +35,13 @@ public class AddressBook implements Serializable {
     //Provincial number
     private String provinceCode;
 
-    //provincial name
+    //Provincial name
     private String provinceName;
 
-    //city number
+    //City number
     private String cityCode;
 
-    //city name
+    //City name
     private String cityName;
 
     //District level division number
