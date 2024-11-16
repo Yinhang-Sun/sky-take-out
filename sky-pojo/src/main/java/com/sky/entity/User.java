@@ -34,7 +34,7 @@ public class User implements Serializable {
     //ID number
     private String idNumber;
 
-    //avatar
+    //Avatar
     private String avatar;
 
     //Registration time

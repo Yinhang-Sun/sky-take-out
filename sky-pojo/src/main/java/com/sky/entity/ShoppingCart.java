@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * shopping cart
+ * Shopping cart
  */
 @Data
 @Builder
@@ -22,28 +22,28 @@ public class ShoppingCart implements Serializable {
 
     private Long id;
 
-    //name
+    //Name
     private String name;
 
-    //user id
+    //User id
     private Long userId;
 
-    //dish id
+    //Dish id
     private Long dishId;
 
-    //setmeal id
+    //Setmeal id
     private Long setmealId;
 
-    //flavor
+    //Flavor
     private String dishFlavor;
 
-    //number
+    //Number
     private Integer number;
 
     //Amount
     private BigDecimal amount;
 
-    //image
+    //Image
     private String image;
 
     private LocalDateTime createTime;
