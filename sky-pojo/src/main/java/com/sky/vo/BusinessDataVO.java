@@ -16,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class BusinessDataVO implements Serializable {
 
-    private Double turnover;//turnover
+    private Double turnover;//Turnover
 
     private Integer validOrderCount;//Number of valid orders
 
