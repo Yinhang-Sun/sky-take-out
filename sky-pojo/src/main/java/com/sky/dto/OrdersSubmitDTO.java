@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 
 @Data
 public class OrdersSubmitDTO implements Serializable {
-    //address book id
+    //Address book id
     private Long addressBookId;
-    //payment method
+    //Payment method
     private int payMethod;
     //Remark
     private String remark;
@@ -24,8 +24,8 @@ public class OrdersSubmitDTO implements Serializable {
     private Integer tablewareNumber;
     //Tableware quantity status 1 Provide according to meal size 0 Select specific quantity
     private Integer tablewareStatus;
-    //packing fee
+    //Packing fee
     private Integer packAmount;
-    //lump sum
+    //Lump sum
     private BigDecimal amount;
 }
