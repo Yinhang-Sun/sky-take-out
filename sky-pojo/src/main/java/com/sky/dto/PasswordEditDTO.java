@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 public class PasswordEditDTO implements Serializable {
 
-    //employee id
+    //Employee id
     private Long empId;
 
     //Old Password
