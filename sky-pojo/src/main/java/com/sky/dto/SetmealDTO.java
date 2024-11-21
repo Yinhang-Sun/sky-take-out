@@ -12,7 +12,7 @@ public class SetmealDTO implements Serializable {
 
     private Long id;
 
-    //category id
+    //Category id
     private Long categoryId;
 
     //Setmeal name
