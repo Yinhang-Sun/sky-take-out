@@ -23,21 +23,21 @@ public class Category implements Serializable {
     //Category Name
     private String name;
 
-    //sort
+    //Sort
     private Integer sort;
 
     //Category status 0 disabled, 1 enabled
     private Integer status;
 
-    //create time
+    //Create time
     private LocalDateTime createTime;
 
-    //update time
+    //Update time
     private LocalDateTime updateTime;
 
-    //create user
+    //Create user
     private Long createUser;
 
-    //update user
+    //Update user
     private Long updateUser;
 }
