@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * dish
+ * Dish
  */
 @Data
 @Builder
