@@ -39,7 +39,7 @@ public class Orders implements Serializable {
 
     private Long id;
 
-    //order number
+    //Order number
     private String number;
 
     //Order status 1 Pending payment 2 Pending order 3 Order received 4 Delivery 5 Completed 6 Canceled 7 Refund
@@ -48,10 +48,10 @@ public class Orders implements Serializable {
     //Order user id
     private Long userId;
 
-    //address id
+    //Address id
     private Long addressBookId;
 
-    //order time
+    //Order time
     private LocalDateTime orderTime;
 
     //Checkout time
@@ -69,13 +69,13 @@ public class Orders implements Serializable {
     //Remark
     private String remark;
 
-    //username
+    //Username
     private String userName;
 
     //Phone number
     private String phone;
 
-    //address
+    //Address
     private String address;
 
     //Receiver
@@ -96,10 +96,10 @@ public class Orders implements Serializable {
     //Delivery status 1-Send immediately 0-Select a specific time
     private Integer deliveryStatus;
 
-    //delivery time
+    //Delivery time
     private LocalDateTime deliveryTime;
 
-    //pack fee
+    //Pack fee
     private int packAmount;
 
     //Quantity of tableware
