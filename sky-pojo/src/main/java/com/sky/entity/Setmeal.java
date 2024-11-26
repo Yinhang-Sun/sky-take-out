@@ -21,13 +21,13 @@ public class Setmeal implements Serializable {
 
     private Long id;
 
-    //category id
+    //Category id
     private Long categoryId;
 
-    //setmeal name
+    //Setmeal name
     private String name;
 
-    //setmeal price
+    //Setmeal price
     private BigDecimal price;
 
     //Status 0: Disabled 1: Enabled
@@ -36,7 +36,7 @@ public class Setmeal implements Serializable {
     //Description
     private String description;
 
-    //setmeal image
+    //Setmeal image
     private String image;
 
     private LocalDateTime createTime;
