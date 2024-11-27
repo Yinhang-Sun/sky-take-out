@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * setmeal dishes relation
+ * Setmeal dishes relation
  */
 @Data
 @Builder
@@ -21,10 +21,10 @@ public class SetmealDish implements Serializable {
 
     private Long id;
 
-    //setmeal id
+    //Setmeal id
     private Long setmealId;
 
-    //dish id
+    //Dish id
     private Long dishId;
 
     //Dish name (redundant field)
