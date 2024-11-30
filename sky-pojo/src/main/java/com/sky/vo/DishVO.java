@@ -30,12 +30,11 @@ public class DishVO implements Serializable {
     private String description;
     //0 off-sale 1 on-sale
     private Integer status;
-    //update time
+    //Update time
     private LocalDateTime updateTime;
     //Category Name
     private String categoryName;
-    //flavors associated with dishes
+    //Flavors associated with dishes
     private List<DishFlavor> flavors = new ArrayList<>();
 
-    //private Integer copies;
 }
