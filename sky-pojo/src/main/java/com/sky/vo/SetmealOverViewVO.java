@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * setmeal overview
+ * Setmeal overview
  */
 @Data
 @Builder
