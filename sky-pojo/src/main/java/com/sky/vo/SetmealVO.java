@@ -19,13 +19,13 @@ public class SetmealVO implements Serializable {
 
     private Long id;
 
-    //category id
+    //Category id
     private Long categoryId;
 
-    //setmeal name
+    //Setmeal name
     private String name;
 
-    //setmeal price
+    //Setmeal price
     private BigDecimal price;
 
     //Status 0: Disabled 1: Enabled
@@ -34,10 +34,10 @@ public class SetmealVO implements Serializable {
     //Description
     private String description;
 
-    //image
+    //Image
     private String image;
 
-    //update time
+    //Update time
     private LocalDateTime updateTime;
 
     //Category Name
