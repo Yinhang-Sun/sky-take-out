@@ -19,7 +19,7 @@ public class UserReportVO implements Serializable {
     //Total number of users, separated by commas, for example: 200,210,220
     private String totalUserList;
 
-    // new users, separated by commas, for example: 20,21,10
+    // New users, separated by commas, for example: 20,21,10
     private String newUserList;
 
 }
