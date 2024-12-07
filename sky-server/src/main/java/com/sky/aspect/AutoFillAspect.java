@@ -55,7 +55,7 @@ public class AutoFillAspect {
 
         //According to the current operation type, assign values to the corresponding properties through reflection
         if(operationType == OperationType.INSERT) {
-            //assign for 4 public fields
+            //Assign for 4 public fields
             try {
                 Method setCreateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_TIME, LocalDateTime.class);
                 Method setCreateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_USER, Long.class);
@@ -71,7 +71,7 @@ public class AutoFillAspect {
                 e.printStackTrace();
             }
         } else if(operationType == OperationType.UPDATE) {
-            //assign for 2 public fields
+            //Assign for 2 public fields
             try {
                 Method setUpdateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);
                 Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, Long.class);
