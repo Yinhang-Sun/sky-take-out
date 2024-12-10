@@ -92,7 +92,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     }
 
     /**
-     * configure static resource mapping
+     * Configure static resource mapping
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -110,7 +110,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         log.info("Extend Message Converters ...");
         //Create a message converter object
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        //set up an object converter for the message converter,
+        //Set up an object converter for the message converter,
         // which can serialize Java objects into json data
         converter.setObjectMapper(new JacksonObjectMapper());
         //Add your own converter to the container
