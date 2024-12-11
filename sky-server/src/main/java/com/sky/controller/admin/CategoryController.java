@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * category
+ * Category
  */
 @RestController
 @RequestMapping("/admin/category")
@@ -26,7 +26,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * add category
+     * Add category
      * @param categoryDTO
      * @return
      */
@@ -39,7 +39,7 @@ public class CategoryController {
     }
 
     /**
-     * category pagination query
+     * Category pagination query
      * @param categoryPageQueryDTO
      * @return
      */
@@ -52,7 +52,7 @@ public class CategoryController {
     }
 
     /**
-     * delete category
+     * Delete category
      * @param id
      * @return
      */
@@ -65,7 +65,7 @@ public class CategoryController {
     }
 
     /**
-     * update category
+     * Update category
      * @param categoryDTO
      * @return
      */
@@ -77,7 +77,7 @@ public class CategoryController {
     }
 
     /**
-     * enable or disable category
+     * Enable or disable category
      * @param status
      * @param id
      * @return
@@ -90,7 +90,7 @@ public class CategoryController {
     }
 
     /**
-     * query category by type
+     * Query category by type
      * @param type
      * @return
      */
