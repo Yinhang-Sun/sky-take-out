@@ -17,7 +17,7 @@ import java.util.UUID;
 
 
 /**
- * Common API
+ * Common APIs
  */
 @RestController
 @RequestMapping("/admin/common")
@@ -46,7 +46,7 @@ public class CommonController {
             //Construct new filename
             String objectName = UUID.randomUUID().toString() + extension;
 
-            //file's request path
+            //File's request path
             String filePath = aliOssUtil.upload(file.getBytes(), objectName);
             return Result.success(filePath);
         } catch (IOException e) {
