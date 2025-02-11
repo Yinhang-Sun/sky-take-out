@@ -1,7 +1,7 @@
 package com.sky.constant;
 
 /**
- * Public fields automatically fill in related constants
+ * Public Fields Automatically Fill in related constants
  */
 public class AutoFillConstant {
     /**
