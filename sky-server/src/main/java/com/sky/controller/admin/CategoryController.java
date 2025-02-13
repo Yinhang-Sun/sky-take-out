@@ -89,15 +89,5 @@ public class CategoryController {
         return Result.success();
     }
 
-    /**
-     * Query category by type
-     * @param type
-     * @return
-     */
-    @GetMapping("/list")
-    @ApiOperation("Query category by type")
-    public Result<List<Category>> list(Integer type){
-        List<Category> list = categoryService.list(type);
-        return Result.success(list);
-    }
+
 }
