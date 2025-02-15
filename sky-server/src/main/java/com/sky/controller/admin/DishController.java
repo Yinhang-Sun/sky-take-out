@@ -140,12 +140,5 @@ public class DishController {
         return Result.success(list);
     }
 
-    /**
-     * Clean redis cache
-     * @param pattern
-     */
-    private void cleanCache(String pattern) {
-        Set keys = redisTemplate.keys(pattern);
-        redisTemplate.delete(keys);
-    }
+
 }
