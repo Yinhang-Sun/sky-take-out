@@ -32,15 +32,5 @@ public class ShopController {
         return Result.success();
     }
 
-    /**
-     * Get shop status
-     * @return
-     */
-    @GetMapping("/status")
-    @ApiOperation("Get shop status")
-    public Result<Integer> getStatus() {
-        Integer status = (Integer) redisTemplate.opsForValue().get(KEY);
-        log.info("Get shop status: {}", status == 1 ? "Open" : "Closed");
-        return Result.success(status);
-    }
+
 }
