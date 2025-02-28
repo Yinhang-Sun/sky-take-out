@@ -64,13 +64,5 @@ public class WorkSpaceController {
         return Result.success(workspaceService.getDishOverView());
     }
 
-    /**
-     * Query setmeal overview
-     * @return
-     */
-    @GetMapping("/overviewSetmeals")
-    @ApiOperation("Query setmeal overview")
-    public Result<SetmealOverViewVO> setmealOverView(){
-        return Result.success(workspaceService.getSetmealOverView());
-    }
+
 }
