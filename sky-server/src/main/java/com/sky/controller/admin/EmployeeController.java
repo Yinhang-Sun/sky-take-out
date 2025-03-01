@@ -124,6 +124,12 @@ public class EmployeeController {
         return Result.success(employee);
     }
 
-
+    @PutMapping
+    @ApiOperation("Edit employee info")
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("Employee update: {}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 
 }
