@@ -112,17 +112,7 @@ public class EmployeeController {
         return Result.success();
     }
 
-    /**
-     * Query employee based on id
-     * @param id
-     * @return
-     */
-    @GetMapping("/{id}")
-    @ApiOperation("Query employee  based on id")
-    public Result<Employee> getById(@PathVariable Long id) {
-        Employee employee = employeeService.getById(id);
-        return Result.success(employee);
-    }
+
 
     @PutMapping
     @ApiOperation("Edit employee info")
