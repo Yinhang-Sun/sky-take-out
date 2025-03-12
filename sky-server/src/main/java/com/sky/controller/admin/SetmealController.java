@@ -96,5 +96,16 @@ public class SetmealController {
         return Result.success();
     }
 
-
+    /**
+     * Start or stop sale setmeal
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("Start or stop setmeal")
+    @CacheEvict(cacheNames = "setmealCache", allEntries = true)
+    public Result startOrStop(@PathVariable Integer status, Long id) {
+        log.info("Start or stop setmeal: {}", id);
+        setmealService.startOrStop(status, id);
+        return Result.success();
+    }
 }
